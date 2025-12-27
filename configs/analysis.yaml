@@ -1,0 +1,76 @@
+# PINN Thermal Analysis Configuration
+# Example configuration file for run_analysis.py
+
+# Material specification
+# Can be a single material or a mixture
+# Examples:
+#   - "aluminum"
+#   - "copper"
+#   - "70% aluminum, 30% copper"
+material: "80% aluminum, 20% copper"
+
+# Heat source configuration
+power: 100.0  # Total power in Watts
+heat_source:
+  type: "gaussian"  # point, rectangular, circular, gaussian
+  position: [0.5, 0.1]  # Normalized position (0-1)
+  size: 0.02  # Radius for circular/gaussian, side length for rectangular
+
+# Geometry configuration
+geometry:
+  type: "heatsink"  # rectangle, heatsink, image
+  
+  # For heatsink type:
+  base_height: 0.003  # 3mm base
+  fin_height: 0.02    # 20mm fins
+  fin_width: 0.002    # 2mm fin width
+  num_fins: 7
+  domain_width: 0.1   # 10cm total width
+  resolution: 100
+  
+  # For image type:
+  # path: "path/to/geometry.png"
+  # physical_size: [0.1, 0.1]
+  
+  # For rectangle type:
+  # width: 0.1
+  # height: 0.1
+  # nx: 100
+  # ny: 100
+
+# Temperature settings
+initial_temperature: 25.0  # °C
+ambient_temperature: 25.0  # °C
+
+# Simulation settings
+simulation_time: 1.0  # seconds
+
+# Boundary conditions
+# Options: fixed, convective, adiabatic
+boundary_conditions:
+  top: convective
+  bottom: fixed  # Usually where heat sink attaches
+  left: adiabatic
+  right: adiabatic
+  
+  # For fixed boundaries:
+  bottom_temp: 85.0  # Temperature at heat source interface
+  
+  # For convective boundaries:
+  convection_coefficient: 25.0  # W/(m²·K)
+
+# Solver settings
+solver:
+  # PINN settings
+  hidden_layers: [64, 64, 64]
+  learning_rate: 0.001
+  num_epochs: 2000
+  use_fourier_features: true
+  
+  # FDM settings (for quick validation)
+  fdm_method: "crank_nicolson"  # explicit, implicit, crank_nicolson
+
+# Output settings
+output_dir: "outputs"
+generate_report: true
+save_animation: true

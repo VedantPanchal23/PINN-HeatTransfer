@@ -1,0 +1,35 @@
+# Inference Configuration
+inference:
+  # Model checkpoint
+  checkpoint_path: "outputs/thermal_surrogate_v1/best_model.pt"
+  
+  # ONNX export (optional)
+  onnx:
+    enabled: false
+    path: "outputs/thermal_surrogate_v1/model.onnx"
+    
+  # Device
+  device: "cuda"
+  
+  # Input processing
+  input:
+    geometry_resolution: 128
+    normalize: true
+    
+  # Output settings
+  output:
+    time_steps: 50
+    spatial_resolution: 128
+    
+  # Visualization
+  visualization:
+    save_heatmaps: true
+    save_animation: true
+    colormap: "hot"
+    fps: 10
+    
+  # Benchmarking
+  benchmark:
+    enabled: true
+    num_warmup: 10
+    num_runs: 100

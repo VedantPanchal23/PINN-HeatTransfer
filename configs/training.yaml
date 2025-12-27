@@ -1,0 +1,82 @@
+# Training Configuration
+training:
+  experiment_name: "thermal_surrogate_v1"
+  output_dir: "outputs"
+  
+  # Model architecture
+  model:
+    type: "fno"  # Options: fno, deeponet, unet_fno
+    
+    # Geometry encoder (pre-computed, frozen during training)
+    encoder:
+      type: "resnet18"
+      pretrained: true
+      freeze: true
+      embedding_dim: 512
+      
+    # Fourier Neural Operator settings
+    fno:
+      modes: 16  # Number of Fourier modes
+      width: 64  # Channel width
+      num_layers: 4
+      padding: 9
+      
+    # DeepONet settings (alternative)
+    deeponet:
+      branch_layers: [512, 256, 256, 128]
+      trunk_layers: [3, 128, 128, 128]  # Input: (t, x, y)
+      
+  # Data loading
+  data:
+    train_path: "data/processed/train.h5"
+    val_path: "data/processed/val.h5"
+    test_path: "data/processed/test.h5"
+    batch_size: 16
+    num_workers: 4
+    pin_memory: true
+    
+  # Optimization
+  optimizer:
+    type: "adamw"
+    lr: 0.001
+    weight_decay: 0.0001
+    betas: [0.9, 0.999]
+    
+  scheduler:
+    type: "cosine"
+    T_max: 200
+    eta_min: 0.00001
+    
+  # Training settings
+  epochs: 200
+  gradient_clip: 1.0
+  
+  # Mixed precision training
+  amp:
+    enabled: true
+    
+  # Checkpointing
+  checkpoint:
+    save_every: 10
+    keep_last: 5
+    
+  # Validation
+  validation:
+    every: 5
+    
+  # Logging
+  logging:
+    tensorboard: true
+    wandb: false
+    log_every: 100
+    
+  # Device
+  device: "cuda"
+  seed: 42
+  
+  # Early stopping
+  early_stopping:
+    enabled: true
+    patience: 30
+    metric: "val_loss"
+    mode: "min"
