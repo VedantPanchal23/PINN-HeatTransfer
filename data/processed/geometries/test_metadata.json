@@ -1,0 +1,2002 @@
+[
+  {
+    "shape_type": "l_shape",
+    "hash": "7abf54f5bff08e77",
+    "index": 0
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "43f94119d937e79f",
+    "index": 1
+  },
+  {
+    "shape_type": "circle",
+    "hash": "862ed2792fe1ba24",
+    "index": 2
+  },
+  {
+    "shape_type": "complex",
+    "hash": "899fbe26aa4b9b3a",
+    "index": 3
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "0115a5fee1ba3ee8",
+    "index": 4
+  },
+  {
+    "shape_type": "circle",
+    "hash": "b798ea7050f8c5c4",
+    "index": 5
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "841e9bc9bc18585a",
+    "index": 6
+  },
+  {
+    "shape_type": "complex",
+    "hash": "ad0662ed9e08702b",
+    "index": 7
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "b440c9937d5f2eb7",
+    "index": 8
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "227aadb5274f570b",
+    "index": 9
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "cac3bf2c3004de68",
+    "index": 10
+  },
+  {
+    "shape_type": "complex",
+    "hash": "d74178d2720b8e63",
+    "index": 11
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "7bc414a999905d5f",
+    "index": 12
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "04c492ae61a69f7f",
+    "index": 13
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "2f030505ccb497f9",
+    "index": 14
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "2e594255720a13ba",
+    "index": 15
+  },
+  {
+    "shape_type": "complex",
+    "hash": "0a07421323b68242",
+    "index": 16
+  },
+  {
+    "shape_type": "complex",
+    "hash": "d0da5761606363bd",
+    "index": 17
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "2e65b0a89146b688",
+    "index": 18
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "b6a45f75eb396022",
+    "index": 19
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "32a4fbd9f085b410",
+    "index": 20
+  },
+  {
+    "shape_type": "complex",
+    "hash": "01da7c3a629d6b21",
+    "index": 21
+  },
+  {
+    "shape_type": "circle",
+    "hash": "2fbdba7daf004d89",
+    "index": 22
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "814c293c9913447b",
+    "index": 23
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "4d2b38ffa225a90c",
+    "index": 24
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "fe060c52218d2193",
+    "index": 25
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "6cf0c62e3daea8de",
+    "index": 26
+  },
+  {
+    "shape_type": "circle",
+    "hash": "b506ba5a8ec2379e",
+    "index": 27
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "3188572af860d219",
+    "index": 28
+  },
+  {
+    "shape_type": "complex",
+    "hash": "e4b4946a426507c7",
+    "index": 29
+  },
+  {
+    "shape_type": "circle",
+    "hash": "1b6635d2998703d3",
+    "index": 30
+  },
+  {
+    "shape_type": "complex",
+    "hash": "0941078e43e57264",
+    "index": 31
+  },
+  {
+    "shape_type": "circle",
+    "hash": "9abc87c43bb8b49a",
+    "index": 32
+  },
+  {
+    "shape_type": "circle",
+    "hash": "81d5120696f9cd9b",
+    "index": 33
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "1954a4a68990f371",
+    "index": 34
+  },
+  {
+    "shape_type": "circle",
+    "hash": "1304feaeed1d25f5",
+    "index": 35
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "01a2cc182e59b870",
+    "index": 36
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "d5391b4034c30ed5",
+    "index": 37
+  },
+  {
+    "shape_type": "complex",
+    "hash": "9c537880a78994be",
+    "index": 38
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "8fd3ea6a75a3b7b7",
+    "index": 39
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "6e3bde9b67a96ef2",
+    "index": 40
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "276671eb44b4f569",
+    "index": 41
+  },
+  {
+    "shape_type": "complex",
+    "hash": "5dd5749f0ecc4862",
+    "index": 42
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "899152046afbaf54",
+    "index": 43
+  },
+  {
+    "shape_type": "circle",
+    "hash": "b1fe4910611738e5",
+    "index": 44
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "478e33e960755884",
+    "index": 45
+  },
+  {
+    "shape_type": "circle",
+    "hash": "be18f0e3807eee20",
+    "index": 46
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "00403fde0079a126",
+    "index": 47
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "4604dff4ed15e57d",
+    "index": 48
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "f295199e7baed3ef",
+    "index": 49
+  },
+  {
+    "shape_type": "complex",
+    "hash": "c3bedc81a9b3f9cc",
+    "index": 50
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "11d503b32858368a",
+    "index": 51
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "5aa8a15d9f7a768a",
+    "index": 52
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "2fcbf7815a87f41e",
+    "index": 53
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "40a3e3c743996ad4",
+    "index": 54
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "a55b17b6a93cb97d",
+    "index": 55
+  },
+  {
+    "shape_type": "complex",
+    "hash": "301c97eee36dd826",
+    "index": 56
+  },
+  {
+    "shape_type": "complex",
+    "hash": "682323a94d7ba989",
+    "index": 57
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "dce460366596a68b",
+    "index": 58
+  },
+  {
+    "shape_type": "complex",
+    "hash": "c914a4d4dba1f4dd",
+    "index": 59
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "6efce353eec15e44",
+    "index": 60
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "924587fc2d96f10a",
+    "index": 61
+  },
+  {
+    "shape_type": "complex",
+    "hash": "79b6c1da53183a16",
+    "index": 62
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "ea619967b0365ceb",
+    "index": 63
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "1ec9d1224e6ec556",
+    "index": 64
+  },
+  {
+    "shape_type": "complex",
+    "hash": "f7bd64f7556cd57e",
+    "index": 65
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "8c9e5aa77ea11e81",
+    "index": 66
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "5cd92bece21a32a7",
+    "index": 67
+  },
+  {
+    "shape_type": "circle",
+    "hash": "54a96119f2e28901",
+    "index": 68
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "f63789421acbda07",
+    "index": 69
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "d9828b335ebf0a62",
+    "index": 70
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "e4a9e677eed109ca",
+    "index": 71
+  },
+  {
+    "shape_type": "complex",
+    "hash": "a7474900f445e79d",
+    "index": 72
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "32b876023ab24011",
+    "index": 73
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "22c3004101f0911c",
+    "index": 74
+  },
+  {
+    "shape_type": "circle",
+    "hash": "7ba028223ef1d21f",
+    "index": 75
+  },
+  {
+    "shape_type": "circle",
+    "hash": "6d8667209727dd29",
+    "index": 76
+  },
+  {
+    "shape_type": "complex",
+    "hash": "fc5a9d076c4cfd76",
+    "index": 77
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "7172cf40376abc0b",
+    "index": 78
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "f78297d3a03cc316",
+    "index": 79
+  },
+  {
+    "shape_type": "complex",
+    "hash": "4ff7780668a9361d",
+    "index": 80
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "8642a8c7717c9616",
+    "index": 81
+  },
+  {
+    "shape_type": "circle",
+    "hash": "713508bd16369b20",
+    "index": 82
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "b39c0d2c1c78bb48",
+    "index": 83
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "1435280a3db57e59",
+    "index": 84
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "cb03ef1ce47a4feb",
+    "index": 85
+  },
+  {
+    "shape_type": "circle",
+    "hash": "0076d48bfc75df2c",
+    "index": 86
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "6ca9ee0838efd9cf",
+    "index": 87
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "1969159cc5905c7d",
+    "index": 88
+  },
+  {
+    "shape_type": "circle",
+    "hash": "f150f0374e70b8fb",
+    "index": 89
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "6ec25e0e17f648c4",
+    "index": 90
+  },
+  {
+    "shape_type": "complex",
+    "hash": "453a23cb3bb80152",
+    "index": 91
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "e9d03769e877258d",
+    "index": 92
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "6564e89feed020b3",
+    "index": 93
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "22256fd3b24e3fb5",
+    "index": 94
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "1d766a4ab4599e4a",
+    "index": 95
+  },
+  {
+    "shape_type": "complex",
+    "hash": "8ab343fc73927b5f",
+    "index": 96
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "86367ec2b3a80188",
+    "index": 97
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "dc60fee295d90a97",
+    "index": 98
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "20f67416cc93aa84",
+    "index": 99
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "ba2730045e8e9026",
+    "index": 100
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "5b2bb0e5005252c4",
+    "index": 101
+  },
+  {
+    "shape_type": "complex",
+    "hash": "cb406fa8f002959e",
+    "index": 102
+  },
+  {
+    "shape_type": "complex",
+    "hash": "de3fbbba2c3d8fe1",
+    "index": 103
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "fb8e44f3ca916273",
+    "index": 104
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "a9910e8c029e0848",
+    "index": 105
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "1b44edd064b82231",
+    "index": 106
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "3b1a8331a384adfa",
+    "index": 107
+  },
+  {
+    "shape_type": "circle",
+    "hash": "ca3cd8f0fa548ca1",
+    "index": 108
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "6b2a6b30b587e69a",
+    "index": 109
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "0a1697be406acb5a",
+    "index": 110
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "1ef2175f9066f119",
+    "index": 111
+  },
+  {
+    "shape_type": "complex",
+    "hash": "e5f0698518a27f52",
+    "index": 112
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "a2f1edd7c3b4e037",
+    "index": 113
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "20df046a0d849e72",
+    "index": 114
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "9dfe88f979297965",
+    "index": 115
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "4988ea1750847866",
+    "index": 116
+  },
+  {
+    "shape_type": "complex",
+    "hash": "52d1377c405446a6",
+    "index": 117
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "433c508cefeae3af",
+    "index": 118
+  },
+  {
+    "shape_type": "circle",
+    "hash": "a4f6db57bcb762b5",
+    "index": 119
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "967433e71dc93ce3",
+    "index": 120
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "b333720641d8a44c",
+    "index": 121
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "1af0cd39e0bd0f25",
+    "index": 122
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "98fc53adcb4c7018",
+    "index": 123
+  },
+  {
+    "shape_type": "complex",
+    "hash": "8cf49acdde84149a",
+    "index": 124
+  },
+  {
+    "shape_type": "complex",
+    "hash": "0124a7cfa5e86ba0",
+    "index": 125
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "7bc3d0f9d5fd6fab",
+    "index": 126
+  },
+  {
+    "shape_type": "circle",
+    "hash": "ab0fdc16271c27b2",
+    "index": 127
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "e8a72ceef56274b9",
+    "index": 128
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "b3524ffb6bbca04f",
+    "index": 129
+  },
+  {
+    "shape_type": "circle",
+    "hash": "869f34cdd67f0be4",
+    "index": 130
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "c5ae09f509b52ea6",
+    "index": 131
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "b01c0e83bb342368",
+    "index": 132
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "cad63ea0af26794a",
+    "index": 133
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "d7ff847d7e9c8b98",
+    "index": 134
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "f91497457b5052ab",
+    "index": 135
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "631ffcf36564a9aa",
+    "index": 136
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "2d53fcb244edfb14",
+    "index": 137
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "3538de1f966d0527",
+    "index": 138
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "004f0dd05f60a43a",
+    "index": 139
+  },
+  {
+    "shape_type": "circle",
+    "hash": "ce474c131f7e79e6",
+    "index": 140
+  },
+  {
+    "shape_type": "complex",
+    "hash": "18d307348b57d7fa",
+    "index": 141
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "9fa10768e09e36a6",
+    "index": 142
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "4c19f371cc5262ab",
+    "index": 143
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "c6ad2df9c7193c07",
+    "index": 144
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "27b0d54cc4b32d50",
+    "index": 145
+  },
+  {
+    "shape_type": "circle",
+    "hash": "a4014514ee53b9b5",
+    "index": 146
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "768537136fbd0a86",
+    "index": 147
+  },
+  {
+    "shape_type": "complex",
+    "hash": "96ee7c194a1080bd",
+    "index": 148
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "d358358e3e1826c0",
+    "index": 149
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "288bf046f76b4950",
+    "index": 150
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "79a3cecfc601bea5",
+    "index": 151
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "3873265bbfd11eb4",
+    "index": 152
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "fd900d2ca1d281d5",
+    "index": 153
+  },
+  {
+    "shape_type": "complex",
+    "hash": "04acf2f8f221226d",
+    "index": 154
+  },
+  {
+    "shape_type": "circle",
+    "hash": "fb51d0f2f5f55867",
+    "index": 155
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "9af813ee76fca015",
+    "index": 156
+  },
+  {
+    "shape_type": "complex",
+    "hash": "5cfe4970cc5bfc4c",
+    "index": 157
+  },
+  {
+    "shape_type": "complex",
+    "hash": "ce5552571e76f24e",
+    "index": 158
+  },
+  {
+    "shape_type": "circle",
+    "hash": "b002440b13283135",
+    "index": 159
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "1d65c59b505b442d",
+    "index": 160
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "a9def861ae8be6c5",
+    "index": 161
+  },
+  {
+    "shape_type": "circle",
+    "hash": "b08e8cf1925d929c",
+    "index": 162
+  },
+  {
+    "shape_type": "complex",
+    "hash": "93fb25f2b56c01ae",
+    "index": 163
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "4e97ebb52a7a37c7",
+    "index": 164
+  },
+  {
+    "shape_type": "circle",
+    "hash": "454051258079d040",
+    "index": 165
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "ed0aa143e91114ba",
+    "index": 166
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "d62ffb5dcfcc5114",
+    "index": 167
+  },
+  {
+    "shape_type": "circle",
+    "hash": "80fde23b85ce9a64",
+    "index": 168
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "c7bc5c1c28a083d6",
+    "index": 169
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "b4abce94e744e51b",
+    "index": 170
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "11e6a54bd3c1b603",
+    "index": 171
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "398c8d9875ab2d10",
+    "index": 172
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "f5fba3770684d00d",
+    "index": 173
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "0243207401375e91",
+    "index": 174
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "a5c4b9c4fbef5d83",
+    "index": 175
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "2b1256dae22a85c2",
+    "index": 176
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "a724f5ef47f1d0dd",
+    "index": 177
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "6b26765c45217320",
+    "index": 178
+  },
+  {
+    "shape_type": "complex",
+    "hash": "08a104b7b1d1fd73",
+    "index": 179
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "a52fefb7491960d7",
+    "index": 180
+  },
+  {
+    "shape_type": "complex",
+    "hash": "0f86df67176cd315",
+    "index": 181
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "2813aecb36904aa9",
+    "index": 182
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "1791a954770213ed",
+    "index": 183
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "62dc770fc1cb9800",
+    "index": 184
+  },
+  {
+    "shape_type": "circle",
+    "hash": "8d7f4c754e9304e1",
+    "index": 185
+  },
+  {
+    "shape_type": "circle",
+    "hash": "25633c48ddc4ba99",
+    "index": 186
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "f5caf7fbbdfd96fb",
+    "index": 187
+  },
+  {
+    "shape_type": "complex",
+    "hash": "cafc513506823a85",
+    "index": 188
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "cfb8236859fa59ac",
+    "index": 189
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "9d912ae45d5526b6",
+    "index": 190
+  },
+  {
+    "shape_type": "complex",
+    "hash": "c5e5f61bad368f99",
+    "index": 191
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "31adb5012f4b071c",
+    "index": 192
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "ed3cf494fd23c2ce",
+    "index": 193
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "72c825ae1ab145a3",
+    "index": 194
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "4b696fec96ea5f17",
+    "index": 195
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "95770d3d7348fbb1",
+    "index": 196
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "5adcf54d36a5495d",
+    "index": 197
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "a6730a55ba749a2a",
+    "index": 198
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "d802bb0581f49956",
+    "index": 199
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "d8ed8be5fdb0a000",
+    "index": 200
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "d31daf93844df818",
+    "index": 201
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "cc4804c8c1d1963d",
+    "index": 202
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "33e9034829802d47",
+    "index": 203
+  },
+  {
+    "shape_type": "complex",
+    "hash": "c91a53355c6fac43",
+    "index": 204
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "346ff39d8e1c9e8f",
+    "index": 205
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "8e17f90d322149c6",
+    "index": 206
+  },
+  {
+    "shape_type": "complex",
+    "hash": "9c10f2788077f6d3",
+    "index": 207
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "15486f61d089d08d",
+    "index": 208
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "92624a78a6d68b55",
+    "index": 209
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "3747f2ee0fcd3c23",
+    "index": 210
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "7abe6d57a05c436a",
+    "index": 211
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "bdc0e41ff6c2a07e",
+    "index": 212
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "0e0dbaae78df59c2",
+    "index": 213
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "4a2197ea3f5bc833",
+    "index": 214
+  },
+  {
+    "shape_type": "circle",
+    "hash": "9411f8bb3d794e41",
+    "index": 215
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "37cc034ef1162c46",
+    "index": 216
+  },
+  {
+    "shape_type": "complex",
+    "hash": "1788192da77cfc1e",
+    "index": 217
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "1ab615c8716e9945",
+    "index": 218
+  },
+  {
+    "shape_type": "complex",
+    "hash": "13770c7d123299c1",
+    "index": 219
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "10e6bd27f7c0edf3",
+    "index": 220
+  },
+  {
+    "shape_type": "complex",
+    "hash": "96631d179339e6f0",
+    "index": 221
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "192b56950a7470db",
+    "index": 222
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "155fd4fadd988a08",
+    "index": 223
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "2971720f8e6b54f6",
+    "index": 224
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "74aec96df279c495",
+    "index": 225
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "fe951902464e2e63",
+    "index": 226
+  },
+  {
+    "shape_type": "circle",
+    "hash": "36f3667727fc0df2",
+    "index": 227
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "2b212a4145e58084",
+    "index": 228
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "5fd07e4a2d78b807",
+    "index": 229
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "ea826367b5d12f64",
+    "index": 230
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "ce6277435d583794",
+    "index": 231
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "1da9368784b9a724",
+    "index": 232
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "2ac22c06df48f1ee",
+    "index": 233
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "8315b064845a3e89",
+    "index": 234
+  },
+  {
+    "shape_type": "complex",
+    "hash": "7cef38bbc4e39c4e",
+    "index": 235
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "af579d9a5e0c06c7",
+    "index": 236
+  },
+  {
+    "shape_type": "circle",
+    "hash": "2cce79edc0a38981",
+    "index": 237
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "f7c52424f980ed84",
+    "index": 238
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "d3a1fe5ee1c990e8",
+    "index": 239
+  },
+  {
+    "shape_type": "circle",
+    "hash": "66cd314886020472",
+    "index": 240
+  },
+  {
+    "shape_type": "circle",
+    "hash": "89908a4d20e8c067",
+    "index": 241
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "0eebc9d00d89661e",
+    "index": 242
+  },
+  {
+    "shape_type": "circle",
+    "hash": "0298891557eab818",
+    "index": 243
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "e3f1826a5b74e581",
+    "index": 244
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "0e56302c732c661e",
+    "index": 245
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "0e3b7934456e4870",
+    "index": 246
+  },
+  {
+    "shape_type": "circle",
+    "hash": "2eb1919a216a98f5",
+    "index": 247
+  },
+  {
+    "shape_type": "complex",
+    "hash": "40097e1442ed4ed0",
+    "index": 248
+  },
+  {
+    "shape_type": "complex",
+    "hash": "2936175c62c14739",
+    "index": 249
+  },
+  {
+    "shape_type": "complex",
+    "hash": "a7bf3d7e76eb16eb",
+    "index": 250
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "a2cc39e3ba30fd04",
+    "index": 251
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "260a968c5350309a",
+    "index": 252
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "a3de7abbb48c662b",
+    "index": 253
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "2dfda34f9e2a7a02",
+    "index": 254
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "f3b2100efa9ecb45",
+    "index": 255
+  },
+  {
+    "shape_type": "circle",
+    "hash": "085e2306eac058df",
+    "index": 256
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "a0382c91179964df",
+    "index": 257
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "89ce9637a1b4874a",
+    "index": 258
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "6e0c25e85cb0ed87",
+    "index": 259
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "82e922f46a2e677c",
+    "index": 260
+  },
+  {
+    "shape_type": "complex",
+    "hash": "6208b15f3d6427ef",
+    "index": 261
+  },
+  {
+    "shape_type": "circle",
+    "hash": "719c616263171deb",
+    "index": 262
+  },
+  {
+    "shape_type": "complex",
+    "hash": "598a05a4074c715f",
+    "index": 263
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "7712b6f401078f88",
+    "index": 264
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "2875c3770f2eab90",
+    "index": 265
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "518b57a0177393cd",
+    "index": 266
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "8a797a94dd1aca2b",
+    "index": 267
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "c785457df26e9ba0",
+    "index": 268
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "d820311b51b0f93d",
+    "index": 269
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "294ef7d81cc5d782",
+    "index": 270
+  },
+  {
+    "shape_type": "circle",
+    "hash": "b474802956fa5c10",
+    "index": 271
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "9fbf5fe9836e07d0",
+    "index": 272
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "9168607fa5738c52",
+    "index": 273
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "5079987db4f4b6a8",
+    "index": 274
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "d30821ca1326b42c",
+    "index": 275
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "f5da18191e418b53",
+    "index": 276
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "81c2f2a058c7ef4a",
+    "index": 277
+  },
+  {
+    "shape_type": "complex",
+    "hash": "21a6c139c0a4bb4e",
+    "index": 278
+  },
+  {
+    "shape_type": "circle",
+    "hash": "9a800635e780b9fc",
+    "index": 279
+  },
+  {
+    "shape_type": "complex",
+    "hash": "8cd14c49af180e51",
+    "index": 280
+  },
+  {
+    "shape_type": "circle",
+    "hash": "08e3b17d6c34898d",
+    "index": 281
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "1363085164ae1bc7",
+    "index": 282
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "cedf500fd3f3aa45",
+    "index": 283
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "3d93fba3ad2d9976",
+    "index": 284
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "32a7642fd8e742f5",
+    "index": 285
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "27903328fd51da60",
+    "index": 286
+  },
+  {
+    "shape_type": "circle",
+    "hash": "aad342bdd4566d70",
+    "index": 287
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "cf45faa6d7ff87b9",
+    "index": 288
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "a9b91716828c4073",
+    "index": 289
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "9a109c4cd8b19bca",
+    "index": 290
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "aa32c5084e25c637",
+    "index": 291
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "2249a80d5c316e6a",
+    "index": 292
+  },
+  {
+    "shape_type": "circle",
+    "hash": "d968b8c5ecab5721",
+    "index": 293
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "59c630149ad5e174",
+    "index": 294
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "fd9d0cbb1e12ce21",
+    "index": 295
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "713266616e5ef521",
+    "index": 296
+  },
+  {
+    "shape_type": "complex",
+    "hash": "07563ca79f80aa82",
+    "index": 297
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "6c607e1590d4b758",
+    "index": 298
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "cf54eb97343c2527",
+    "index": 299
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "bad652dedac1f9ee",
+    "index": 300
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "c2304aa43223c923",
+    "index": 301
+  },
+  {
+    "shape_type": "circle",
+    "hash": "ce3a55fb149336b9",
+    "index": 302
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "3aae0f48b53fcef3",
+    "index": 303
+  },
+  {
+    "shape_type": "complex",
+    "hash": "5d23fdf1aeda01c3",
+    "index": 304
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "841e83fe70b961c6",
+    "index": 305
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "2d5b1a812cda0cf9",
+    "index": 306
+  },
+  {
+    "shape_type": "circle",
+    "hash": "c13305367e10e9fc",
+    "index": 307
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "c7a8ecf7dc6e6c65",
+    "index": 308
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "0c276b4c525ac1f7",
+    "index": 309
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "a28c864f9b1b85cb",
+    "index": 310
+  },
+  {
+    "shape_type": "complex",
+    "hash": "c34d4a8f0dbb9749",
+    "index": 311
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "3dee056d2744148e",
+    "index": 312
+  },
+  {
+    "shape_type": "complex",
+    "hash": "7995814ea2e07a22",
+    "index": 313
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "d7ab8236d9c15eb1",
+    "index": 314
+  },
+  {
+    "shape_type": "complex",
+    "hash": "30b420fbfa73e1a8",
+    "index": 315
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "f5831d9c6b03aa96",
+    "index": 316
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "97b7e60eb739f2ff",
+    "index": 317
+  },
+  {
+    "shape_type": "circle",
+    "hash": "59e719816843aa6f",
+    "index": 318
+  },
+  {
+    "shape_type": "circle",
+    "hash": "c275f6ab2331e6e1",
+    "index": 319
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "99fa1a5300fadf32",
+    "index": 320
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "dfd7b70915f46f53",
+    "index": 321
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "de31e3c1e1c0a526",
+    "index": 322
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "f7702cc31b8145ca",
+    "index": 323
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "bf2a146f6fae036e",
+    "index": 324
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "e67af887330dc92d",
+    "index": 325
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "4151c02e18ceaac6",
+    "index": 326
+  },
+  {
+    "shape_type": "complex",
+    "hash": "bcf0e3d5f7bfada3",
+    "index": 327
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "76a6cd7428b2747d",
+    "index": 328
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "e5416556fe5d8c5e",
+    "index": 329
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "c5f4b022f68d2d70",
+    "index": 330
+  },
+  {
+    "shape_type": "complex",
+    "hash": "97c43e5963e32463",
+    "index": 331
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "25a25822bf9b62dd",
+    "index": 332
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "16b37e61fcb8ca52",
+    "index": 333
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "b39498e585733d9b",
+    "index": 334
+  },
+  {
+    "shape_type": "circle",
+    "hash": "58e050caad7b67aa",
+    "index": 335
+  },
+  {
+    "shape_type": "circle",
+    "hash": "e5e4ac2c0f21b970",
+    "index": 336
+  },
+  {
+    "shape_type": "circle",
+    "hash": "301672d2fbc09cca",
+    "index": 337
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "6dc35a0f4493af01",
+    "index": 338
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "b796ba4fa6de6e61",
+    "index": 339
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "00032a73b683121e",
+    "index": 340
+  },
+  {
+    "shape_type": "complex",
+    "hash": "59118fa6d1c72b0a",
+    "index": 341
+  },
+  {
+    "shape_type": "complex",
+    "hash": "14c83ce6c1e1ef51",
+    "index": 342
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "ccd29fcfe3fa6ff0",
+    "index": 343
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "46e621793f7a24f2",
+    "index": 344
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "5dfb612c524c5448",
+    "index": 345
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "695d343f1ebe8db9",
+    "index": 346
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "de924c91039cd7c1",
+    "index": 347
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "392dd0f003d62d5f",
+    "index": 348
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "22359b1195df0821",
+    "index": 349
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "b7fc3eb2ab839eed",
+    "index": 350
+  },
+  {
+    "shape_type": "circle",
+    "hash": "97cdd2906397a079",
+    "index": 351
+  },
+  {
+    "shape_type": "circle",
+    "hash": "9d2a66fc374d4794",
+    "index": 352
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "747fab4c619a4dc0",
+    "index": 353
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "24282d132879384f",
+    "index": 354
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "fa63340ad511a282",
+    "index": 355
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "21007ffd56c4fa48",
+    "index": 356
+  },
+  {
+    "shape_type": "complex",
+    "hash": "3af91fe34f78c12e",
+    "index": 357
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "18db4cbeba0ddfc7",
+    "index": 358
+  },
+  {
+    "shape_type": "circle",
+    "hash": "08d484b3cab2efbb",
+    "index": 359
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "4521de7d38bef63e",
+    "index": 360
+  },
+  {
+    "shape_type": "circle",
+    "hash": "33158d9ed16d9313",
+    "index": 361
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "7b64ebca42f1f0b9",
+    "index": 362
+  },
+  {
+    "shape_type": "circle",
+    "hash": "aa148fa436e3db45",
+    "index": 363
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "b39d43d8266dacd2",
+    "index": 364
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "42e273acd10279e4",
+    "index": 365
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "ec1f33f21d669442",
+    "index": 366
+  },
+  {
+    "shape_type": "complex",
+    "hash": "fb98cb3d89dc5451",
+    "index": 367
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "e596366e4fe54bee",
+    "index": 368
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "7da07abfa7714ba9",
+    "index": 369
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "0a518b4dc346b29c",
+    "index": 370
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "d3229d91afe2a715",
+    "index": 371
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "e9dbc01fa5601b8e",
+    "index": 372
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "6c5adc2d76ad0159",
+    "index": 373
+  },
+  {
+    "shape_type": "circle",
+    "hash": "1b4d8dc450925507",
+    "index": 374
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "5c2bdaa21dc439ae",
+    "index": 375
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "a590bf435c322022",
+    "index": 376
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "032734182abe1fdb",
+    "index": 377
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "51e254cdaaec5502",
+    "index": 378
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "b29281cb7a695ffb",
+    "index": 379
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "382bd0e82672b11f",
+    "index": 380
+  },
+  {
+    "shape_type": "t_shape",
+    "hash": "e825741b10f26c7d",
+    "index": 381
+  },
+  {
+    "shape_type": "circle",
+    "hash": "8a21eb5ab7c36e66",
+    "index": 382
+  },
+  {
+    "shape_type": "circle",
+    "hash": "2bb544441ba9fe50",
+    "index": 383
+  },
+  {
+    "shape_type": "complex",
+    "hash": "5447695befa0781b",
+    "index": 384
+  },
+  {
+    "shape_type": "circle",
+    "hash": "093792ef87317e8d",
+    "index": 385
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "2289baeb0af8fa5e",
+    "index": 386
+  },
+  {
+    "shape_type": "complex",
+    "hash": "f2d8aafbea115eaa",
+    "index": 387
+  },
+  {
+    "shape_type": "complex",
+    "hash": "09b07c19e88bed66",
+    "index": 388
+  },
+  {
+    "shape_type": "complex",
+    "hash": "d6ea55c44393d99a",
+    "index": 389
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "24c0c8d40b89915c",
+    "index": 390
+  },
+  {
+    "shape_type": "ellipse",
+    "hash": "cd796d204d32bd91",
+    "index": 391
+  },
+  {
+    "shape_type": "polygon",
+    "hash": "570bb66fc2b2609a",
+    "index": 392
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "c5d35e0a96e7719c",
+    "index": 393
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "46d11ce0542cbf68",
+    "index": 394
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "766a862384f1d20c",
+    "index": 395
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "495b460610f70493",
+    "index": 396
+  },
+  {
+    "shape_type": "l_shape",
+    "hash": "dab549450ccce97c",
+    "index": 397
+  },
+  {
+    "shape_type": "rectangle",
+    "hash": "0cfdd17c8b664c1d",
+    "index": 398
+  },
+  {
+    "shape_type": "circle",
+    "hash": "680ad480d3191df1",
+    "index": 399
+  }
+]
