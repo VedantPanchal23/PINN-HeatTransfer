@@ -135,12 +135,12 @@ PINN/
 
 ## 🚀 Installation
 
-### Option 1: Local Installation
+### Quick Start (Recommended)
 
 ```bash
 # Clone repository
-git clone <repository-url>
-cd PINN
+git clone https://github.com/VedantPanchal23/PINN-HeatTransfer.git
+cd PINN-HeatTransfer
 
 # Create virtual environment
 python -m venv venv
@@ -149,9 +149,16 @@ venv\Scripts\activate  # Windows
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Run the app - that's it!
+streamlit run app/streamlit_app.py
 ```
 
-### Option 2: Docker Installation
+Navigate to `http://localhost:8501` in your browser.
+
+> **Note**: The Streamlit app runs simulations on-the-fly using the PINN solver. No pre-generated data is required!
+
+### Docker Installation (Alternative)
 
 ```bash
 # Build the Docker image
@@ -214,13 +221,13 @@ docker-compose up streamlit
 
 ## 📖 Usage
 
-### Option 1: Web Interface (Streamlit)
+### Option 1: Web Interface (Streamlit) ⭐ Recommended
 
 ```bash
 streamlit run app/streamlit_app.py
 ```
 
-Navigate to `http://localhost:8501` in your browser.
+Navigate to `http://localhost:8501` in your browser. The app runs simulations on-the-fly - no setup needed!
 
 ### Option 2: Command Line
 
