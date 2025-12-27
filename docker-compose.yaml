@@ -1,0 +1,155 @@
+version: '3.8'
+
+services:
+  # ===== Streamlit Web Interface =====
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pinn-thermal:latest
+    container_name: pinn-streamlit
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./configs:/app/configs
+    ports:
+      - "8501:8501"
+    command: streamlit run app/streamlit_app.py --server.port=8501 --server.address=0.0.0.0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ===== Training Service =====
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pinn-thermal:latest
+    container_name: pinn-train
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./configs:/app/configs
+    command: python scripts/train.py --config configs/training.yaml
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # ===== API Server =====
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pinn-thermal:latest
+    container_name: pinn-api
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./models:/app/models
+    ports:
+      - "8000:8000"
+    command: python scripts/api_server.py --port 8000
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ===== Data Generation Service =====
+  datagen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pinn-thermal:latest
+    container_name: pinn-datagen
+    runtime: nvidia
+    volumes:
+      - ./data:/app/data
+      - ./configs:/app/configs
+    command: python scripts/generate_dataset.py --config configs/dataset.yaml
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # ===== Evaluation Service =====
+  evaluate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pinn-thermal:latest
+    container_name: pinn-evaluate
+    runtime: nvidia
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./models:/app/models
+    command: python scripts/evaluate.py --checkpoint /app/models/best_model.pt
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # ===== Jupyter Notebook Service =====
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pinn-thermal:latest
+    container_name: pinn-jupyter
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - JUPYTER_ENABLE_LAB=yes
+    volumes:
+      - ./:/app
+    ports:
+      - "8888:8888"
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
