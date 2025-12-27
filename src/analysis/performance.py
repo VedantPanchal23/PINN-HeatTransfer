@@ -202,14 +202,21 @@ class PerformanceAnalyzer:
         initial_temp = max_temps[0]
         
         # If no temperature change, already at steady state
-        if abs(final_temp - initial_temp) < 1e-10:
+        temp_change = final_temp - initial_temp
+        if abs(temp_change) < 1e-10:
             return 0.0
         
-        target = initial_temp + threshold * (final_temp - initial_temp)
+        target = initial_temp + threshold * temp_change
         
         for i, t in enumerate(time_points):
-            if max_temps[i] >= target:
-                return t
+            if temp_change > 0:
+                # Heating - temperature increasing
+                if max_temps[i] >= target:
+                    return t
+            else:
+                # Cooling - temperature decreasing  
+                if max_temps[i] <= target:
+                    return t
         
         return time_points[-1]
     
@@ -229,17 +236,25 @@ class PerformanceAnalyzer:
         initial_temp = max_temps[0]
         
         # If no temperature change, return 0
-        if abs(final_temp - initial_temp) < 1e-10:
+        temp_change = final_temp - initial_temp
+        if abs(temp_change) < 1e-10:
             return 0.0
         
         # Time constant is when T = T0 + 0.632 * (T_final - T0)
-        target = initial_temp + 0.632 * (final_temp - initial_temp)
+        # This works for both heating (positive change) and cooling (negative change)
+        target = initial_temp + 0.632 * temp_change
         
         for i, t in enumerate(time_points):
-            if max_temps[i] >= target:
-                return t
+            if temp_change > 0:
+                # Heating - temperature increasing
+                if max_temps[i] >= target:
+                    return t
+            else:
+                # Cooling - temperature decreasing
+                if max_temps[i] <= target:
+                    return t
         
-        return time_points[-1] / 5  # Rough estimate
+        return time_points[-1] / 5  # Rough estimate if not found
     
     def _default_metrics(self, ambient_temperature: float = 25.0) -> ThermalPerformanceMetrics:
         """Return default metrics when input is invalid."""
@@ -268,17 +283,24 @@ class PerformanceAnalyzer:
         if h < 2 or w < 2:
             return 0.0, (0.5, 0.5)
         
-        # Calculate gradients
-        dy = self.domain_size[1] / h * 1000  # mm
-        dx = self.domain_size[0] / w * 1000  # mm
+        # Calculate gradients - ensure non-zero spacing
+        dy = max(self.domain_size[1] / h * 1000, 1e-10)  # mm, avoid division by zero
+        dx = max(self.domain_size[0] / w * 1000, 1e-10)  # mm
         
         grad_y, grad_x = np.gradient(temperature_field, dy, dx)
         gradient_magnitude = np.sqrt(grad_x**2 + grad_y**2)
         
-        max_grad = np.max(gradient_magnitude)
-        max_idx = np.unravel_index(np.argmax(gradient_magnitude), gradient_magnitude.shape)
+        # Handle NaN values in gradient
+        gradient_magnitude = np.nan_to_num(gradient_magnitude, nan=0.0, posinf=0.0, neginf=0.0)
         
-        location = (max_idx[1] / w, max_idx[0] / h)  # Normalized (x, y)
+        max_grad = np.max(gradient_magnitude)
+        
+        # Find location of maximum gradient
+        if max_grad > 0:
+            max_idx = np.unravel_index(np.argmax(gradient_magnitude), gradient_magnitude.shape)
+            location = (max_idx[1] / w, max_idx[0] / h)  # Normalized (x, y)
+        else:
+            location = (0.5, 0.5)  # Center if no gradient
         
         return max_grad, location
     

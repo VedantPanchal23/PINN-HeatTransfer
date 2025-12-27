@@ -149,16 +149,16 @@ class ValidationComparison:
         t_max = reference_times[max_idx[0]] if len(reference_times) > max_idx[0] else 0
         
         if reference_x.ndim == 2:
-            x_max = reference_x[max_idx[1], max_idx[2]]
-            y_max = reference_y[max_idx[1], max_idx[2]]
+            x_max = reference_x[max_idx[1], max_idx[2]] if max_idx[1] < reference_x.shape[0] and max_idx[2] < reference_x.shape[1] else 0.0
+            y_max = reference_y[max_idx[1], max_idx[2]] if max_idx[1] < reference_y.shape[0] and max_idx[2] < reference_y.shape[1] else 0.0
         else:
-            x_max = reference_x[max_idx[2]]
-            y_max = reference_y[max_idx[1]]
+            x_max = reference_x[max_idx[2]] if max_idx[2] < len(reference_x) else 0.0
+            y_max = reference_y[max_idx[1]] if max_idx[1] < len(reference_y) else 0.0
         
         # Speedup (comparing solve time to PINN inference)
-        # Assume inference is ~0.01s for a forward pass
-        pinn_inference_time = 0.01
-        speedup = reference_solve_time / (pinn_inference_time + 1e-10)
+        # Assume inference is ~0.01s for a forward pass, but use actual training time for context
+        pinn_inference_time = max(0.01, pinn_training_time / 1000) if pinn_training_time > 0 else 0.01
+        speedup = reference_solve_time / pinn_inference_time if pinn_inference_time > 0 else 0.0
         
         self.metrics = ValidationMetrics(
             mse=mse,

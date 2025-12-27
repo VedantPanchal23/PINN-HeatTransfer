@@ -187,12 +187,16 @@ def show_geometry_page():
                 ny, nx = mask.shape
                 boundary_points = np.array([[0, 0], [physical_size, 0], [physical_size, physical_size], [0, physical_size]])
                 
+                # Calculate actual geometry area based on mask pixels
+                pixel_area = (physical_size / nx) * (physical_size / ny)
+                geometry_area = np.sum(mask) * pixel_area
+                
                 domain_info = DomainInfo(
                     mask=mask,
                     sdf=np.zeros_like(mask),
                     boundary_points=boundary_points,
-                    area=physical_size * physical_size,
-                    perimeter=4 * physical_size,
+                    area=geometry_area,  # Use actual geometry area, not full domain
+                    perimeter=4 * physical_size,  # Approximation - could compute from mask boundary
                     centroid=(physical_size/2, physical_size/2),
                     bounding_box=(0, 0, physical_size, physical_size),
                     resolution=(ny, nx),
@@ -632,6 +636,48 @@ def show_simulation_page():
             step=100
         )
     
+    # Heat Transfer Coefficient Configuration
+    st.subheader("🌡️ Cooling Configuration")
+    
+    cooling_type = st.selectbox(
+        "Cooling Method",
+        ["Natural Convection (Air)", "Forced Convection (Fan)", "Liquid Cooling", "Custom"],
+        help="Select cooling method - this affects heat transfer coefficient"
+    )
+    
+    # Preset h values based on cooling type
+    h_conv_presets = {
+        "Natural Convection (Air)": 10.0,
+        "Forced Convection (Fan)": 50.0,
+        "Liquid Cooling": 500.0,
+        "Custom": 25.0
+    }
+    
+    if cooling_type == "Custom":
+        h_conv = st.number_input(
+            "Heat Transfer Coefficient h (W/m²·K)",
+            min_value=1.0,
+            max_value=10000.0,
+            value=25.0,
+            step=5.0,
+            help="Typical values: Natural air 5-25, Forced air 25-250, Water 500-10000"
+        )
+    else:
+        h_conv = h_conv_presets[cooling_type]
+        st.info(f"📊 Heat transfer coefficient: **{h_conv} W/(m²·K)**")
+    
+    # Show cooling info
+    with st.expander("ℹ️ Cooling Method Reference"):
+        st.markdown("""
+        | Cooling Method | h [W/(m²·K)] | Typical Use |
+        |----------------|--------------|-------------|
+        | Natural Convection (Air) | 5-25 | Passive cooling, enclosed electronics |
+        | Forced Convection (Fan) | 25-250 | CPU/GPU coolers, active heat sinks |
+        | Liquid Cooling (Water) | 500-10,000 | High-power electronics, data centers |
+        | Liquid Cooling (Oil) | 50-1,500 | Transformers, industrial equipment |
+        | Boiling Water | 2,500-25,000 | Nuclear reactors, extreme cooling |
+        """)
+    
     st.subheader("Boundary Conditions")
     
     bc_types = {
@@ -646,7 +692,9 @@ def show_simulation_page():
         'ambient_temp': ambient_temp,
         'simulation_time': simulation_time,
         'num_epochs': num_epochs,
-        'boundary_conditions': bc_types
+        'boundary_conditions': bc_types,
+        'h_conv': h_conv,
+        'cooling_type': cooling_type
     }
     
     if ready:
@@ -672,7 +720,7 @@ def run_simulation():
     
     # Get domain
     domain = st.session_state['domain_info']
-    nx, ny = domain.mask.shape[1], domain.mask.shape[0]
+    ny, nx = domain.mask.shape[0], domain.mask.shape[1]
     
     # Physical parameters
     k = props.thermal_conductivity  # W/(m·K)
@@ -685,13 +733,12 @@ def run_simulation():
     thickness = 0.005  # 5mm thickness assumption
     
     # Create coordinate grids
-    x = np.linspace(0, L, nx)
-    y = np.linspace(0, L, ny)
-    X, Y = np.meshgrid(x, y)
-    dx = L / nx
+    dx = L / nx  # Grid spacing in meters
+    dy = L / ny
     
-    # Heat transfer coefficient (W/(m²·K))
-    h_conv = 10.0  # Natural convection
+    # Heat transfer coefficient (W/(m²·K)) - Use configured value
+    h_conv = config.get('h_conv', 10.0)  # Default to natural convection if not set
+    cooling_type = config.get('cooling_type', 'Natural Convection (Air)')
     
     # Calculate total heat source power
     total_power = sum(source['power'] for source in st.session_state['heat_sources'])
@@ -711,23 +758,70 @@ def run_simulation():
     thermal_mass = rho * volume * cp
     time_constant = thermal_mass * R_total
     
-    # Simulate temperature evolution
+    # Simulate temperature evolution using Finite Difference Method
     T = np.ones((ny, nx)) * config['initial_temp']
-    num_steps = 20
+    num_steps = 50  # More steps for smoother diffusion
     t_total = config.get('simulation_time', 10.0)
     dt = t_total / num_steps
     
+    # Stability criterion for explicit FDM: dt <= dx²/(4*alpha)
+    dt_stable = (dx ** 2) / (4 * alpha)
+    
+    # Use smaller time step if needed for stability
+    if dt > dt_stable:
+        num_substeps = int(np.ceil(dt / dt_stable)) + 1
+    else:
+        num_substeps = 1
+    dt_sub = dt / num_substeps
+    
     # Create heat source field (Q in W/m³)
     Q_field = np.zeros((ny, nx))
+    
+    # Calculate cell volume for heat source normalization
+    cell_volume = dx * dy * thickness  # m³
+    
     for source in st.session_state['heat_sources']:
-        x_src = source['x'] * L
-        y_src = source['y'] * L
-        radius = source.get('radius', 0.02) * L  # Heat source spread
+        # Convert normalized position (0-1) to grid indices
+        x_idx = int(source['x'] * (nx - 1))
+        y_idx = int(source['y'] * (ny - 1))
         
-        dist2 = (X - x_src)**2 + (Y - y_src)**2
-        # Gaussian heat distribution
-        source_field = source['power'] * np.exp(-dist2 / (2 * radius**2)) / (2 * np.pi * radius**2 * thickness)
-        Q_field += source_field
+        # Clamp to valid range
+        x_idx = max(0, min(nx - 1, x_idx))
+        y_idx = max(0, min(ny - 1, y_idx))
+        
+        # Check if heat source is inside geometry
+        if domain.mask[y_idx, x_idx] < 0.5:
+            st.warning(f"Heat source at ({source['x']:.2f}, {source['y']:.2f}) is outside the geometry!")
+        
+        # Radius in pixels (minimum 2 pixels for spreading)
+        radius_px = max(2, int(source.get('radius', 0.05) * min(nx, ny)))
+        sigma = max(radius_px, 2)
+        
+        # Create Gaussian heat distribution
+        for i in range(ny):
+            for j in range(nx):
+                if domain.mask[i, j] > 0.5:  # Only inside geometry
+                    dist2 = (i - y_idx)**2 + (j - x_idx)**2
+                    # Gaussian with proper normalization
+                    # Power (W) distributed over area, converted to volumetric (W/m³)
+                    gauss_weight = np.exp(-dist2 / (2 * sigma**2))
+                    Q_field[i, j] += source['power'] * gauss_weight
+    
+    # Normalize Q_field so total power is conserved
+    Q_sum = np.sum(Q_field)
+    if Q_sum > 0:
+        Q_field = Q_field * (total_power / Q_sum) / cell_volume  # Convert to W/m³
+    
+    # Precompute boundary mask (cells at edge of geometry)
+    from scipy import ndimage
+    geometry_mask_bool = domain.mask > 0.5
+    geometry_eroded = ndimage.binary_erosion(geometry_mask_bool)
+    boundary_mask = geometry_mask_bool & ~geometry_eroded
+    
+    # Biot number check for lumped vs distributed analysis
+    Bi = h_conv * dx / k
+    if Bi > 0.1:
+        st.info(f"Biot number = {Bi:.2f} > 0.1: Using distributed thermal analysis")
     
     for step in range(num_steps):
         progress = (step + 1) / num_steps
@@ -735,33 +829,81 @@ def run_simulation():
         t_current = (step + 1) * dt
         status_text.text(f"Simulating heat transfer... t = {t_current:.2f}s ({step+1}/{num_steps})")
         
-        # Transient solution using exponential approach
-        # T(t) = T_ambient + ΔT_steady × (1 - exp(-t/τ)) + heat source contribution
-        time_factor = 1.0 - np.exp(-t_current / max(time_constant, 0.1))
+        # FDM Heat Diffusion with sub-stepping for stability (Vectorized)
+        for _ in range(num_substeps):
+            # Compute Laplacian using vectorized operations
+            # For interior points, use neighbors; for boundary, use ambient temp
+            T_padded = np.pad(T, 1, mode='edge')  # Use edge values for padding
+            
+            # Set padded boundary to ambient for convective BC effect
+            T_padded[0, :] = config['ambient_temp']
+            T_padded[-1, :] = config['ambient_temp']
+            T_padded[:, 0] = config['ambient_temp']
+            T_padded[:, -1] = config['ambient_temp']
+            
+            # Laplacian: ∇²T = (T[i+1,j] + T[i-1,j])/dy² + (T[i,j+1] + T[i,j-1] - 2*T)/dx² - (2/dx² + 2/dy²)*T
+            # For square grid (dx=dy), simplifies to standard form
+            # Using dx for both since grid is assumed square, but use min for safety
+            dxy = min(dx, dy)
+            laplacian = (
+                T_padded[2:, 1:-1] +   # T[i+1, j]
+                T_padded[:-2, 1:-1] +  # T[i-1, j]
+                T_padded[1:-1, 2:] +   # T[i, j+1]
+                T_padded[1:-1, :-2] -  # T[i, j-1]
+                4 * T
+            ) / (dxy ** 2)
+            
+            # Heat equation: dT/dt = alpha * ∇²T + Q/(rho*cp)
+            # Q_field is in W/m³, divide by (rho*cp) to get K/s
+            heat_source_term = Q_field / (rho * cp)
+            
+            # Temperature update
+            dT = dt_sub * (alpha * laplacian + heat_source_term)
+            T_new = T + dT
+            
+            # Apply convective cooling at geometry boundaries (Robin BC)
+            # -k * dT/dn = h * (T - T_ambient)
+            # Approximation: T_boundary_new = T - (h*dx/k) * (T - T_ambient) * (dt_sub * alpha / dx²)
+            cooling_factor = (h_conv / k) * dx * (dt_sub * alpha / (dx**2))
+            cooling_factor = min(cooling_factor, 0.5)  # Limit for stability
+            
+            T_new = np.where(
+                boundary_mask,
+                T_new - cooling_factor * (T_new - config['ambient_temp']),
+                T_new
+            )
+            
+            # Ensure temperature doesn't go below ambient (physical constraint)
+            T_new = np.maximum(T_new, config['ambient_temp'])
+            
+            # Apply geometry mask (outside = ambient)
+            T = np.where(geometry_mask_bool, T_new, config['ambient_temp'])
         
-        # Temperature from heat sources (using thermal diffusion)
-        T = config['initial_temp'] + (Q_field * dx**2 / k) * time_factor * 100  # Scaled for visualization
-        
-        # Add convective boundary effect
-        T = T + (config['ambient_temp'] - config['initial_temp']) * (1 - time_factor) * 0.1
-        
-        # Cap maximum temperature based on physics
-        max_possible_temp = config['ambient_temp'] + total_power / (h_conv * A_surface * 0.5)
-        
-        # Apply domain mask
-        T = T * domain.mask + config['ambient_temp'] * (1 - domain.mask)
+        # Create masked temperature for visualization (NaN outside geometry)
+        T_display = np.where(geometry_mask_bool, T, np.nan)
         
         # Show live animation
         fig, ax = plt.subplots(figsize=(8, 6))
-        im = ax.imshow(T, cmap='hot', origin='lower', aspect='equal')
+        
+        # Overlay temperature only inside geometry
+        vmin_temp = config['ambient_temp']
+        vmax_temp = np.nanmax(T_display) if not np.all(np.isnan(T_display)) else config['ambient_temp'] + 10
+        vmax_temp = max(vmax_temp, vmin_temp + 5)  # Ensure some range
+        
+        im = ax.imshow(T_display, cmap='hot', origin='lower', aspect='equal',
+                       vmin=vmin_temp, vmax=vmax_temp)
+        
+        # Show geometry outline
+        ax.contour(domain.mask, levels=[0.5], colors='cyan', linewidths=1.5, origin='lower')
+        
         ax.set_title(f'Temperature Distribution (t = {t_current:.2f}s)')
-        ax.set_xlabel('X')
-        ax.set_ylabel('Y')
+        ax.set_xlabel('X (pixels)')
+        ax.set_ylabel('Y (pixels)')
         
         # Add annotations
-        max_temp = np.max(T)
-        mean_temp = np.mean(T[domain.mask > 0])
-        ax.text(0.02, 0.98, f'Max: {max_temp:.1f}°C\nMean: {mean_temp:.1f}°C', 
+        max_temp = np.nanmax(T_display) if not np.all(np.isnan(T_display)) else config['ambient_temp']
+        mean_temp = np.nanmean(T_display) if not np.all(np.isnan(T_display)) else config['ambient_temp']
+        ax.text(0.02, 0.98, f'Max: {max_temp:.1f}°C\nMean: {mean_temp:.1f}°C\nΔT: {max_temp - config["ambient_temp"]:.1f}°C', 
                 transform=ax.transAxes, verticalalignment='top',
                 bbox=dict(boxstyle='round', facecolor='white', alpha=0.8),
                 fontsize=10)
@@ -770,46 +912,46 @@ def run_simulation():
         animation_placeholder.pyplot(fig)
         plt.close(fig)
         
-        time.sleep(0.3)  # Animation delay
+        time.sleep(0.15)  # Animation delay
     
-    # Final temperature field (steady state)
-    T_final = np.ones((ny, nx)) * config['initial_temp']
-    for source in st.session_state['heat_sources']:
-        x_src = source['x'] * L
-        y_src = source['y'] * L
-        radius = source.get('radius', 0.02) * L
-        
-        dist = np.sqrt((X - x_src)**2 + (Y - y_src)**2)
-        # Steady-state temperature distribution (simplified analytical solution)
-        # Based on point source in infinite medium: T = Q/(4πkr) + T_ambient
-        # Modified for finite geometry with boundary conditions
-        T_contribution = source['power'] / (4 * np.pi * k * np.maximum(dist, dx)) 
-        T_final += T_contribution
+    # Use final T from FDM simulation
+    T_final = T.copy()
     
-    T_final = T_final * domain.mask + config['ambient_temp'] * (1 - domain.mask)
+    # Apply domain mask to ensure clean result
+    T_final = np.where(geometry_mask_bool, T_final, config['ambient_temp'])
+    
+    # Calculate statistics only for points inside geometry
+    T_inside = T_final[geometry_mask_bool]
     
     # Store results
     st.session_state['simulation_results'] = {
         'temperature_field': T_final,
-        'max_temp': float(np.max(T_final)),
-        'mean_temp': float(np.mean(T_final[domain.mask > 0])),
-        'min_temp': float(np.min(T_final[domain.mask > 0])),
+        'max_temp': float(np.max(T_inside)) if len(T_inside) > 0 else config['ambient_temp'],
+        'mean_temp': float(np.mean(T_inside)) if len(T_inside) > 0 else config['ambient_temp'],
+        'min_temp': float(np.min(T_inside)) if len(T_inside) > 0 else config['ambient_temp'],
         'time_constant': time_constant,
         'steady_state_analytical': T_steady_analytical,
         'total_power': total_power,
+        'h_conv': h_conv,
+        'cooling_type': cooling_type,
+        'geometry_mask': geometry_mask_bool,
     }
     
     # Thermal limit analysis
     analyzer = ThermalLimitAnalyzer()
     
+    # Use physical domain area (from mask if DomainInfo provides it, otherwise calculate)
+    physical_area = domain.area if hasattr(domain, 'area') and domain.area > 0 else L * L
+    
     limit_result = analyzer.analyze(
         material_props=props,
         heat_source_power=total_power,
-        domain_area=domain.area,
+        domain_area=physical_area,
         domain_thickness=0.005,  # 5mm thickness assumption
         ambient_temp=config['ambient_temp'],
+        heat_transfer_coeff=h_conv,  # Use configured heat transfer coefficient
         initial_temp=config['initial_temp'],
-        predicted_temps=T_final.flatten(),  # Use final temperature field
+        predicted_temps=T_inside,  # Use final temperature field inside geometry
     )
     
     st.session_state['thermal_limits'] = limit_result
@@ -847,6 +989,18 @@ def show_results_page():
     with col4:
         delta = results['max_temp'] - results['min_temp']
         st.metric("Range", f"{delta:.1f}°C")
+    
+    # Cooling configuration display
+    if 'h_conv' in results:
+        st.markdown("---")
+        st.subheader("🌬️ Cooling Configuration")
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Cooling Method", results.get('cooling_type', 'Natural Convection'))
+        with col2:
+            st.metric("Heat Transfer Coeff (h)", f"{results['h_conv']:.1f} W/(m²·K)")
+        with col3:
+            st.metric("Total Heat Power", f"{results['total_power']:.1f} W")
     
     # Thermal limits and lifetime analysis
     if 'thermal_limits' in st.session_state and st.session_state['thermal_limits'] is not None:
@@ -991,17 +1145,45 @@ def show_results_page():
     
     T = results['temperature_field']
     
-    fig, ax = plt.subplots(figsize=(10, 8))
-    im = ax.imshow(T, cmap='hot', origin='lower', aspect='equal')
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_title('Temperature Distribution')
-    plt.colorbar(im, label='Temperature (°C)')
-    
-    # Mark hotspots
-    max_idx = np.unravel_index(np.argmax(T), T.shape)
-    ax.plot(max_idx[1], max_idx[0], 'c*', markersize=20, label='Max Temperature')
-    ax.legend()
+    # Get geometry mask for proper visualization
+    if 'domain_info' in st.session_state:
+        domain = st.session_state['domain_info']
+        geometry_mask = domain.mask
+        
+        # Create masked temperature field - show NaN outside geometry
+        T_masked = np.where(geometry_mask > 0.5, T, np.nan)
+        
+        fig, ax = plt.subplots(figsize=(10, 8))
+        
+        # Show geometry outline in gray
+        ax.imshow(geometry_mask, cmap='gray', origin='lower', aspect='equal', alpha=0.3)
+        
+        # Overlay temperature field only inside geometry
+        im = ax.imshow(T_masked, cmap='hot', origin='lower', aspect='equal', 
+                       vmin=np.nanmin(T_masked), vmax=np.nanmax(T_masked))
+        
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_title('Temperature Distribution (within geometry)')
+        plt.colorbar(im, label='Temperature (°C)')
+        
+        # Mark hotspots (only within geometry)
+        T_in_geom = np.where(geometry_mask > 0.5, T, -np.inf)
+        max_idx = np.unravel_index(np.argmax(T_in_geom), T_in_geom.shape)
+        ax.plot(max_idx[1], max_idx[0], 'c*', markersize=20, label='Max Temperature')
+        ax.legend()
+    else:
+        fig, ax = plt.subplots(figsize=(10, 8))
+        im = ax.imshow(T, cmap='hot', origin='lower', aspect='equal')
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_title('Temperature Distribution')
+        plt.colorbar(im, label='Temperature (°C)')
+        
+        # Mark hotspots
+        max_idx = np.unravel_index(np.argmax(T), T.shape)
+        ax.plot(max_idx[1], max_idx[0], 'c*', markersize=20, label='Max Temperature')
+        ax.legend()
     
     st.pyplot(fig)
     plt.close()

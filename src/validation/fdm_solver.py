@@ -186,14 +186,19 @@ class FDMSolver:
         t: float,
     ) -> np.ndarray:
         """Explicit (FTCS) time stepping."""
+        # Check CFL stability condition
+        if rx + ry > 0.5:
+            import warnings
+            warnings.warn(f"CFL condition violated: rx={rx:.4f}, ry={ry:.4f}, rx+ry={rx+ry:.4f} > 0.5. Results may be unstable.")
+        
         T_new = T.copy()
         
-        # Interior points
+        # Interior points - use standard 5-point stencil Laplacian
         T_new[1:-1, 1:-1] = T[1:-1, 1:-1] + \
             rx * (T[1:-1, 2:] - 2*T[1:-1, 1:-1] + T[1:-1, :-2]) + \
             ry * (T[2:, 1:-1] - 2*T[1:-1, 1:-1] + T[:-2, 1:-1])
         
-        # Add heat source
+        # Add heat source (Q is volumetric generation rate in K/s)
         if heat_source is not None:
             Q = heat_source(self.X[1:-1, 1:-1], self.Y[1:-1, 1:-1], t)
             T_new[1:-1, 1:-1] += self.dt * Q

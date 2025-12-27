@@ -207,7 +207,8 @@ class HeatSourceConfiguration:
         
         dx = self.domain_size[0] / resolution
         dy = self.domain_size[1] / resolution
-        cell_volume = dx * dy * 0.001  # Assume 1mm thickness for 2D
+        thickness = 0.001  # Assume 1mm thickness for 2D
+        cell_volume = dx * dy * thickness
         
         for source in self.sources:
             power = source.get_power_at_time(time)
@@ -215,35 +216,46 @@ class HeatSourceConfiguration:
             
             if source.source_type == HeatSourceType.POINT:
                 # Approximate point source as small Gaussian
-                sigma = source.size
+                sigma = max(source.size, 1e-6)  # Avoid zero sigma
                 dist2 = (X - sx)**2 + (Y - sy)**2
                 field = np.exp(-dist2 / (2 * sigma**2))
-                field = field / (field.sum() * cell_volume + 1e-10)
+                field_sum = field.sum()
+                if field_sum > 1e-10:
+                    field = field / (field_sum * cell_volume)
                 Q += power * field
             
             elif source.source_type == HeatSourceType.RECTANGULAR:
-                w, h = source.size
+                w, h = source.size if isinstance(source.size, tuple) else (source.size, source.size)
                 mask = (
                     (X >= sx - w/2) & (X <= sx + w/2) &
                     (Y >= sy - h/2) & (Y <= sy + h/2)
                 )
-                area = w * h * self.domain_size[0] * self.domain_size[1]
-                volume = area * 0.001  # 1mm thickness
-                Q[mask] += power / (volume + 1e-10)
+                # Calculate actual area covered in physical units
+                physical_w = w * self.domain_size[0]
+                physical_h = h * self.domain_size[1]
+                area = physical_w * physical_h
+                volume = area * thickness
+                if volume > 1e-10 and mask.sum() > 0:
+                    Q[mask] += power / volume
             
             elif source.source_type == HeatSourceType.CIRCULAR:
-                r = source.size
+                r = source.size if isinstance(source.size, (int, float)) else source.size[0]
                 dist = np.sqrt((X - sx)**2 + (Y - sy)**2)
                 mask = dist <= r
-                area = np.pi * (r * self.domain_size[0])**2
-                volume = area * 0.001
-                Q[mask] += power / (volume + 1e-10)
+                # Physical radius
+                physical_r = r * min(self.domain_size[0], self.domain_size[1])
+                area = np.pi * physical_r**2
+                volume = area * thickness
+                if volume > 1e-10 and mask.sum() > 0:
+                    Q[mask] += power / volume
             
             elif source.source_type == HeatSourceType.GAUSSIAN:
-                sigma = source.size
+                sigma = max(source.size if isinstance(source.size, (int, float)) else source.size[0], 1e-6)
                 dist2 = (X - sx)**2 + (Y - sy)**2
                 field = np.exp(-dist2 / (2 * sigma**2))
-                field = field / (field.sum() * cell_volume + 1e-10)
+                field_sum = field.sum()
+                if field_sum > 1e-10:
+                    field = field / (field_sum * cell_volume)
                 Q += power * field
         
         return Q

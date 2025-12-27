@@ -442,13 +442,20 @@ class EnhancedPINNSolver:
             'ic': loss_ic.item(),
         }
         
-        # Compute mean loss
-        mean_loss = np.mean(list(losses.values()))
+        # Compute mean loss (with protection against zero)
+        loss_values = list(losses.values())
+        mean_loss = np.mean(loss_values)
+        
+        # Skip update if mean is effectively zero (all losses are zero)
+        if mean_loss < 1e-12:
+            return
         
         # Adjust weights inversely proportional to loss magnitude
         for key in self.adaptive_weights:
-            if losses[key] > 0:
+            if losses[key] > 1e-12:  # Avoid division by very small numbers
                 ratio = mean_loss / losses[key]
+                # Clamp ratio to prevent extreme weight changes
+                ratio = np.clip(ratio, 0.1, 10.0)
                 # Smooth update with momentum
                 self.adaptive_weights[key] = 0.9 * self.adaptive_weights[key] + 0.1 * ratio
     
@@ -495,26 +502,44 @@ class EnhancedPINNSolver:
         max_temp = temperature_field.max()
         max_idx = np.unravel_index(temperature_field.argmax(), temperature_field.shape)
         max_temp_time = physical_times[max_idx[0]]
-        max_temp_location = (X[max_idx[1], max_idx[2]], Y[max_idx[1], max_idx[2]])
+        # Ensure indices are within bounds for X, Y arrays
+        y_idx = min(max_idx[1], resolution - 1)
+        x_idx = min(max_idx[2], resolution - 1)
+        max_temp_location = (X[y_idx, x_idx], Y[y_idx, x_idx])
         
         # Steady state analysis (last time step)
         steady_state_temp = temperature_field[-1].max()
         
         # Estimate time to steady state (99% of final value)
+        # Handle both heating and cooling scenarios
         final_max = temperature_field[-1].max()
-        for i, t_phys in enumerate(physical_times):
-            if temperature_field[i].max() >= 0.99 * final_max:
-                time_to_steady = t_phys
-                break
+        initial_max = temperature_field[0].max()
+        temp_change = final_max - initial_max
+        time_to_steady = physical_times[-1]  # Default to final time
+        
+        if abs(temp_change) > 1e-10:
+            target = initial_max + 0.99 * temp_change
+            for i, t_phys in enumerate(physical_times):
+                current_max = temperature_field[i].max()
+                if temp_change > 0:  # Heating
+                    if current_max >= target:
+                        time_to_steady = t_phys
+                        break
+                else:  # Cooling
+                    if current_max <= target:
+                        time_to_steady = t_phys
+                        break
         else:
-            time_to_steady = physical_times[-1]
+            time_to_steady = 0.0  # Already at steady state
         
         # Thermal limit analysis
         analyzer = ThermalLimitAnalyzer()
         
         domain_area = 0.1 * 0.1  # 10cm x 10cm
         domain_thickness = 0.005  # 5mm
-        heat_power = self.heat_sources.total_power if self.heat_sources else 0.0
+        heat_power = 0.0
+        if self.heat_sources is not None:
+            heat_power = getattr(self.heat_sources, 'total_power', 0.0) or 0.0
         
         limit_result = analyzer.analyze(
             material_props=self.material_props,

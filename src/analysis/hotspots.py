@@ -160,6 +160,10 @@ class HotspotDetector:
                 return "critical"
             return "medium"
         
+        # Handle invalid max_operating_temp values
+        if max_operating_temp <= 0:
+            return "medium"  # Cannot determine severity without valid limit
+        
         ratio = temperature / max_operating_temp
         
         if ratio >= 1.0:

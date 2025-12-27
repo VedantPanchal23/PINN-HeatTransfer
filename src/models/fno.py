@@ -102,13 +102,22 @@ class SpectralConv2d(nn.Module):
             dtype=torch.cfloat, device=x.device
         )
         
-        # Apply spectral convolution on low-frequency modes
-        out_ft[:, :, :self.modes1, :self.modes2] = self.compl_mul2d(
-            x_ft[:, :, :self.modes1, :self.modes2], self.weights1
-        )
-        out_ft[:, :, -self.modes1:, :self.modes2] = self.compl_mul2d(
-            x_ft[:, :, -self.modes1:, :self.modes2], self.weights2
-        )
+        # Clamp modes to available frequency dimensions to prevent index errors
+        # For rfft2, the output has shape (h, w//2 + 1) in frequency domain
+        modes1_actual = min(self.modes1, h // 2)  # Can't exceed half the height
+        modes2_actual = min(self.modes2, w // 2 + 1)  # Can't exceed rfft2 width
+        
+        # Skip spectral conv if modes are invalid
+        if modes1_actual > 0 and modes2_actual > 0:
+            # Apply spectral convolution on low-frequency modes
+            out_ft[:, :, :modes1_actual, :modes2_actual] = self.compl_mul2d(
+                x_ft[:, :, :modes1_actual, :modes2_actual], 
+                self.weights1[:, :, :modes1_actual, :modes2_actual]
+            )
+            out_ft[:, :, -modes1_actual:, :modes2_actual] = self.compl_mul2d(
+                x_ft[:, :, -modes1_actual:, :modes2_actual], 
+                self.weights2[:, :, :modes1_actual, :modes2_actual]
+            )
         
         # Transform back to physical space
         x = torch.fft.irfft2(out_ft, s=(h, w))

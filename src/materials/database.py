@@ -334,6 +334,72 @@ MATERIALS_DATA: Dict[str, Dict] = {
         "max_operating_temp": 200.0,
         "category": "semiconductor",
     },
+    
+    # ============== HIGH-PERFORMANCE THERMAL MATERIALS ==============
+    "diamond": {
+        "thermal_conductivity": 2200.0,  # Highest thermal conductivity
+        "density": 3510.0,
+        "specific_heat": 509.0,
+        "melting_point": 3550.0,
+        "max_operating_temp": 1800.0,
+        "category": "high_performance",
+    },
+    "graphene_composite": {
+        "thermal_conductivity": 1500.0,  # In-plane conductivity
+        "density": 2100.0,
+        "specific_heat": 700.0,
+        "melting_point": 3600.0,
+        "max_operating_temp": 500.0,
+        "category": "high_performance",
+    },
+    "copper_tungsten": {
+        "thermal_conductivity": 280.0,  # Cu-W composite (80/20)
+        "density": 15600.0,
+        "specific_heat": 200.0,
+        "melting_point": 2800.0,
+        "max_operating_temp": 1200.0,
+        "category": "high_performance",
+    },
+    "aluminum_silicon_carbide": {
+        "thermal_conductivity": 200.0,  # AlSiC composite
+        "density": 3000.0,
+        "specific_heat": 800.0,
+        "melting_point": 660.0,
+        "max_operating_temp": 450.0,
+        "category": "high_performance",
+    },
+    "copper_molybdenum": {
+        "thermal_conductivity": 250.0,  # Cu-Mo composite
+        "density": 10200.0,
+        "specific_heat": 280.0,
+        "melting_point": 2610.0,
+        "max_operating_temp": 1000.0,
+        "category": "high_performance",
+    },
+    "beryllium_oxide": {
+        "thermal_conductivity": 330.0,  # BeO ceramic
+        "density": 3010.0,
+        "specific_heat": 1030.0,
+        "melting_point": 2507.0,
+        "max_operating_temp": 1800.0,
+        "category": "high_performance",
+    },
+    "pyrolytic_graphite": {
+        "thermal_conductivity": 1700.0,  # In-plane
+        "density": 2200.0,
+        "specific_heat": 710.0,
+        "melting_point": 3600.0,
+        "max_operating_temp": 3000.0,
+        "category": "high_performance",
+    },
+    "copper_diamond": {
+        "thermal_conductivity": 600.0,  # Cu-Diamond composite
+        "density": 5500.0,
+        "specific_heat": 420.0,
+        "melting_point": 1085.0,
+        "max_operating_temp": 600.0,
+        "category": "high_performance",
+    },
 }
 
 

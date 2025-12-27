@@ -198,33 +198,35 @@ class MixtureCalculator:
                 k_avg = k1 * f1 + k2 * f2
                 return k_avg, k_avg
             
-            # Lower bound (matrix is lower conductivity material)
+            # Hashin-Shtrikman bounds for binary mixture
+            # Identify low (L) and high (H) conductivity phases
             if k1 < k2:
-                km, ki = k1, k2
-                fm, fi = f1, f2
+                k_L, k_H = k1, k2
+                f_L, f_H = f1, f2
             else:
-                km, ki = k2, k1
-                fm, fi = f2, f1
+                k_L, k_H = k2, k1
+                f_L, f_H = f2, f1
             
-            # Avoid division by zero when km is very small
-            if km < 1e-10:
-                k_lower = km
+            # Lower bound: matrix is low-conductivity phase
+            # k_lower = k_L + f_H / (1/(k_H - k_L) + f_L/(3*k_L))
+            if k_L < 1e-10:
+                k_lower = k_L
             else:
-                k_lower = km + fi / (1/(ki - km) + fm/(3*km))
+                k_lower = k_L + f_H / (1.0/(k_H - k_L) + f_L/(3.0*k_L))
             
-            # Upper bound (matrix is higher conductivity material)
-            if k1 > k2:
-                km, ki = k1, k2
-                fm, fi = f1, f2
+            # Upper bound: matrix is high-conductivity phase
+            # k_upper = k_H + f_L / (1/(k_L - k_H) + f_H/(3*k_H))
+            # Note: (k_L - k_H) is negative, so rewrite as:
+            # k_upper = k_H - f_L / (1/(k_H - k_L) - f_H/(3*k_H))
+            # Or equivalently using absolute form:
+            if k_H < 1e-10:
+                k_upper = k_L * f_L + k_H * f_H
             else:
-                km, ki = k2, k1
-                fm, fi = f2, f1
-            
-            # Avoid division by zero when km is very small
-            if km < 1e-10:
-                k_upper = ki * fi
-            else:
-                k_upper = km + fi / (1/(ki - km) + fm/(3*km))
+                denom = -1.0/(k_H - k_L) + f_H/(3.0*k_H)
+                if abs(denom) < 1e-10:
+                    k_upper = k_L * f_L + k_H * f_H  # Fallback to arithmetic mean
+                else:
+                    k_upper = k_H + f_L / denom
             
             return min(k_lower, k_upper), max(k_lower, k_upper)
         

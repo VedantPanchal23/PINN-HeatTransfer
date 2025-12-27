@@ -45,13 +45,13 @@ def plot_temperature_field(
     """
     # Handle different input shapes
     if temperature.ndim == 3:
-        field = temperature[time_idx]
+        field = temperature[time_idx].copy()
     else:
-        field = temperature
+        field = temperature.copy()
     
-    # Apply mask if provided
+    # Apply mask if provided - use NaN for masked areas for proper colormap handling
     if geometry_mask is not None:
-        field = field * geometry_mask
+        field = np.where(geometry_mask > 0.5, field, np.nan)
     
     fig, ax = plt.subplots(figsize=figsize)
     
@@ -124,11 +124,12 @@ def create_animation(
     """
     num_frames = temperature.shape[0]
     
-    # Compute global min/max for consistent colormap
+    # Compute global min/max for consistent colormap (only inside geometry)
     if geometry_mask is not None:
-        masked_temp = temperature * geometry_mask[np.newaxis, :, :]
-        vmin = masked_temp.min()
-        vmax = masked_temp.max()
+        mask_bool = geometry_mask > 0.5
+        masked_temp = np.where(mask_bool, temperature, np.nan)
+        vmin = np.nanmin(masked_temp)
+        vmax = np.nanmax(masked_temp)
     else:
         vmin = temperature.min()
         vmax = temperature.max()
@@ -136,9 +137,9 @@ def create_animation(
     # Create figure
     fig, ax = plt.subplots(figsize=figsize)
     
-    # Initial frame
+    # Initial frame - use NaN masking for proper colormap
     if geometry_mask is not None:
-        field = temperature[0] * geometry_mask
+        field = np.where(geometry_mask > 0.5, temperature[0], np.nan)
     else:
         field = temperature[0]
     
@@ -168,12 +169,12 @@ def create_animation(
     
     def update(frame):
         if geometry_mask is not None:
-            field = temperature[frame] * geometry_mask
+            field = np.where(geometry_mask > 0.5, temperature[frame], np.nan)
         else:
             field = temperature[frame]
         
         im.set_array(field)
-        t = frame / (num_frames - 1)
+        t = frame / (num_frames - 1) if num_frames > 1 else 0
         time_text.set_text(f'{title} (t = {t:.2f})')
         return [im, time_text]
     
